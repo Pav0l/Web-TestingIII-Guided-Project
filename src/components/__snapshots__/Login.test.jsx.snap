@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login can change input values 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      <label
+        for="usernameInput"
+      >
+        username
+      </label>
+      <input
+        class="input"
+        id="usernameInput"
+        placeholder="username"
+        type="text"
+      />
+      <br />
+      <label
+        for="passwordInput"
+      >
+        password
+      </label>
+      <input
+        class="input"
+        id="passwordInput"
+        placeholder="password"
+        type="text"
+      />
+    </div>
+    <div />
+  </div>
+</DocumentFragment>
+`;

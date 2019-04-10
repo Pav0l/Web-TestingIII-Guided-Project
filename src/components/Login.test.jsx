@@ -17,6 +17,23 @@ describe('Login', () => {
     // and we can grab inputs by their placeholder texts or their values
     const wrap = rt.render(<Login />);
 
+    /*
+      SNAPSHOTING
+    */
+    // so when running this test, a snapshot of the actuall DOM is taken
+    // and saved in __snapshots__ folder inside components folder
+    expect(wrap.asFragment()).toMatchSnapshot();
+    /*
+      › 1 snapshot written.
+      Snapshot Summary
+      › 1 snapshot written from 1 test suite.
+    */
+
+    // now if you do changes to the DOM, you will get an error when running this code
+    // saying that the DOM is different than that of snapshot
+    // you can update the snapshot with pressing 'u' if you want to update it
+    // to current DOM view
+
     const inputValue = 'name';
     const passValue = 'secretPassword';
 
