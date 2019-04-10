@@ -4,18 +4,18 @@ module.exports = {
       switch (payload.username) {
         case 'Alex':
           // should succeed resolving
-          // {
-          //   data: {
-          //     token: 'the-token',
-          //     username: 'Alex',
-          //   }
-          // }
+          return Promise.resolve({
+            data: {
+              token: 'the-token',
+              username: 'Alex',
+            },
+          });
 
         default:
-        // should fail rejecting
-        // {
-        //   message: 'Invalid Credentials',
-        // }
+          // should fail rejecting
+          return Promise.reject({
+            message: 'Invalid Credentials',
+          });
       }
     }
   },
