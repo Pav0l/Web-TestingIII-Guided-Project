@@ -4,10 +4,30 @@ import Login from './Login';
 
 afterEach(rt.cleanup);
 
+/*
+  TESTS SETUP
+*/
+// function that cleans up any tests
+// and returns rendered element
+function setUpWrap(props = {}) {
+  rt.cleanup();
+  return rt.render(<Login {...props} />);
+}
+
+// declare wrap variable so it is in scope of tests
+let wrap;
+
+// before each test, assign the rendered <Login/> component to wrap variable
+beforeEach(() => {
+  wrap = setUpWrap();
+});
+
+// with tests setup, I don't need the const wrap = rt.render(<Login />); declaration
+// in every test anymore
+
 describe('Login', () => {
   it('displays no login button if no username & no password', () => {
     // write test first, see it fail, implement feature, see test pass
-    const wrap = rt.render(<Login />);
     const loginBtn = wrap.queryByTestId(/loginButton/i);
     expect(loginBtn).toBeFalsy();
   });
@@ -15,7 +35,6 @@ describe('Login', () => {
   it('can change input values', () => {
     // we can fire change events on inputs
     // and we can grab inputs by their placeholder texts or their values
-    const wrap = rt.render(<Login />);
 
     /*
       SNAPSHOTING
@@ -52,7 +71,6 @@ describe('Login', () => {
   });
 
   it('disallows non-alphanumeric usernames or passwords', () => {
-    const wrap = rt.render(<Login />);
     rt.fireEvent.change(wrap.getByPlaceholderText('username'), {
       target: { value: '.' },
     });
@@ -61,7 +79,6 @@ describe('Login', () => {
   });
 
   it('displays login button if username & password', () => {
-    const wrap = rt.render(<Login />);
     const usernameInput = wrap.getByLabelText('username');
     const passwordInput = wrap.getByLabelText('password');
 
@@ -76,7 +93,6 @@ describe('Login', () => {
 
   it('can login successfully', async () => {
     // grab the component
-    const wrap = rt.render(<Login />);
     // change username to Alex
     rt.fireEvent.change(wrap.getByPlaceholderText('username'), {
       target: { value: 'Alex' },
@@ -95,7 +111,6 @@ describe('Login', () => {
 
   it('can fail miserably', async () => {
     // grab the component
-    const wrap = rt.render(<Login />);
     // change username to something different than Alex
     rt.fireEvent.change(wrap.getByPlaceholderText('username'), {
       target: { value: 'Frank' },
