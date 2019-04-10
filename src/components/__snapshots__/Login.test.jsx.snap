@@ -17,6 +17,7 @@ exports[`Login can change input values 1`] = `
         id="usernameInput"
         placeholder="username"
         type="text"
+        value=""
       />
       <br />
       <label
@@ -29,6 +30,7 @@ exports[`Login can change input values 1`] = `
         id="passwordInput"
         placeholder="password"
         type="text"
+        value=""
       />
     </div>
     <div />

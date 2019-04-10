@@ -51,6 +51,15 @@ describe('Login', () => {
     expect(wrap.getByDisplayValue(passValue));
   });
 
+  it('disallows non-alphanumeric usernames or passwords', () => {
+    const wrap = rt.render(<Login />);
+    rt.fireEvent.change(wrap.getByPlaceholderText('username'), {
+      target: { value: '.' },
+    });
+
+    expect(wrap.getByPlaceholderText('username').value).toBe('');
+  });
+
   it('displays login button if username & password', () => {
     const wrap = rt.render(<Login />);
     const usernameInput = wrap.getByLabelText('username');
@@ -66,10 +75,40 @@ describe('Login', () => {
   });
 
   it('can login successfully', async () => {
-    // see the greeting render
+    // grab the component
+    const wrap = rt.render(<Login />);
+    // change username to Alex
+    rt.fireEvent.change(wrap.getByPlaceholderText('username'), {
+      target: { value: 'Alex' },
+    });
+    // change password to be longer than 0
+    rt.fireEvent.change(wrap.getByLabelText('password'), {
+      target: { value: 'secret' },
+    });
+    // click the login button
+    rt.fireEvent.click(wrap.queryByTestId(/loginButton/i));
+    // await flash msg to appear
+    await wrap.findByText(/welcome/i);
+    // assert message
+    expect(wrap.getByText(/welcome/i));
   });
 
   it('can fail miserably', async () => {
-    // see the error render
+    // grab the component
+    const wrap = rt.render(<Login />);
+    // change username to something different than Alex
+    rt.fireEvent.change(wrap.getByPlaceholderText('username'), {
+      target: { value: 'Frank' },
+    });
+    // change password to be longer than 0
+    rt.fireEvent.change(wrap.getByLabelText('password'), {
+      target: { value: 'frankSecret' },
+    });
+    // click the login button
+    rt.fireEvent.click(wrap.queryByTestId(/loginButton/i));
+    // await flash msg to appear
+    await wrap.findByText(/invalid/i);
+    // assert message
+    expect(wrap.getByText(/invalid/i));
   });
 });
