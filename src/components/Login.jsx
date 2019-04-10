@@ -26,6 +26,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <div>
+        <h3>Login form</h3>
         <div>
           <label htmlFor='usernameInput'>username</label>
           <input

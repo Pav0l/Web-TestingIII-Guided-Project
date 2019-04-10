@@ -3,6 +3,9 @@
 exports[`Login can change input values 1`] = `
 <DocumentFragment>
   <div>
+    <h3>
+      Login form
+    </h3>
     <div>
       <label
         for="usernameInput"
